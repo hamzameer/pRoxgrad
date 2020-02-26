@@ -6,49 +6,6 @@
 
 using namespace Rcpp;
 
-// one
-int one();
-RcppExport SEXP _pRoxgrad_one() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(one());
-    return rcpp_result_gen;
-END_RCPP
-}
-// signC
-int signC(int x);
-RcppExport SEXP _pRoxgrad_signC(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(signC(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// sumC
-double sumC(NumericVector x);
-RcppExport SEXP _pRoxgrad_sumC(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(sumC(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// meanC
-double meanC(NumericVector x);
-RcppExport SEXP _pRoxgrad_meanC(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(meanC(x));
-    return rcpp_result_gen;
-END_RCPP
-}
 // getmaxEigenValue
 double getmaxEigenValue(arma::mat M);
 RcppExport SEXP _pRoxgrad_getmaxEigenValue(SEXP MSEXP) {
@@ -125,29 +82,13 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// timesTwo
-NumericVector timesTwo(NumericVector x);
-RcppExport SEXP _pRoxgrad_timesTwo(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(timesTwo(x));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_pRoxgrad_one", (DL_FUNC) &_pRoxgrad_one, 0},
-    {"_pRoxgrad_signC", (DL_FUNC) &_pRoxgrad_signC, 1},
-    {"_pRoxgrad_sumC", (DL_FUNC) &_pRoxgrad_sumC, 1},
-    {"_pRoxgrad_meanC", (DL_FUNC) &_pRoxgrad_meanC, 1},
     {"_pRoxgrad_getmaxEigenValue", (DL_FUNC) &_pRoxgrad_getmaxEigenValue, 1},
     {"_pRoxgrad_shrink_groupcpp", (DL_FUNC) &_pRoxgrad_shrink_groupcpp, 2},
     {"_pRoxgrad_cal2normcpp", (DL_FUNC) &_pRoxgrad_cal2normcpp, 2},
     {"_pRoxgrad_soft_thresholdingcpp", (DL_FUNC) &_pRoxgrad_soft_thresholdingcpp, 2},
     {"_pRoxgrad_SPGcpp", (DL_FUNC) &_pRoxgrad_SPGcpp, 19},
-    {"_pRoxgrad_timesTwo", (DL_FUNC) &_pRoxgrad_timesTwo, 1},
     {NULL, NULL, 0}
 };
 

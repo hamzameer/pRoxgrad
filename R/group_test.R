@@ -26,6 +26,7 @@
 # option = NULL
 # C1 <- as.matrix(C)
 # 
+# library(pRoxgrad)
 # solve = SPG(prob = 'group', Y = Y, X = X, gamma = gamma, lambda = lambda, C= C, CNorm = Cnorm, g_idx = g_idx)
 # 
 # 
