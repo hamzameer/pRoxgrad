@@ -17,32 +17,24 @@ meanC <- function(x) {
     .Call(`_pRoxgrad_meanC`, x)
 }
 
-getEigenValues <- function(M) {
-    .Call(`_pRoxgrad_getEigenValues`, M)
+getmaxEigenValue <- function(M) {
+    .Call(`_pRoxgrad_getmaxEigenValue`, M)
 }
 
-shrink_groupcpp <- function(C, g_idx) {
-    .Call(`_pRoxgrad_shrink_groupcpp`, C, g_idx)
-}
-
-cal2normcpp <- function(A, g_idx) {
-    .Call(`_pRoxgrad_cal2normcpp`, A, g_idx)
-}
-
-soft_thresholding <- function(v, lambdaL) {
-    .Call(`_pRoxgrad_soft_thresholding`, v, lambdaL)
-}
-
-SPGcpp <- function(X, Y, J, gamma, lambda, Cnorm, mu, C, w, g_idx, theta, beta, maxiter, display_iter, N, tol) {
-    .Call(`_pRoxgrad_SPGcpp`, X, Y, J, gamma, lambda, Cnorm, mu, C, w, g_idx, theta, beta, maxiter, display_iter, N, tol)
+shrink_groupcpp <- function(A, g_idx) {
+    .Call(`_pRoxgrad_shrink_groupcpp`, A, g_idx)
 }
 
 cal2normcpp <- function(A, g_idx) {
     .Call(`_pRoxgrad_cal2normcpp`, A, g_idx)
 }
 
-soft_thresholding <- function(v, lambdaL) {
-    .Call(`_pRoxgrad_soft_thresholding`, v, lambdaL)
+soft_thresholdingcpp <- function(v, lambdaL) {
+    .Call(`_pRoxgrad_soft_thresholdingcpp`, v, lambdaL)
+}
+
+SPGcpp <- function(X, Y, XX, XY, J, gamma, lambda, CNorm, mu, C, w, g_idx, L, theta, beta, maxiter, display_iter, N, tol) {
+    .Call(`_pRoxgrad_SPGcpp`, X, Y, XX, XY, J, gamma, lambda, CNorm, mu, C, w, g_idx, L, theta, beta, maxiter, display_iter, N, tol)
 }
 
 timesTwo <- function(x) {

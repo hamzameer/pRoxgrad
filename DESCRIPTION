@@ -12,7 +12,9 @@ Imports:
     Matrix,
     pracma,
     roxygen2,
-    RcppArmadillo
+    RcppArmadillo,
+    RSpectra,
+    Rfast
 LinkingTo: 
     Rcpp,
     RcppArmadillo

@@ -49,26 +49,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// getEigenValues
-arma::vec getEigenValues(arma::mat M);
-RcppExport SEXP _pRoxgrad_getEigenValues(SEXP MSEXP) {
+// getmaxEigenValue
+double getmaxEigenValue(arma::mat M);
+RcppExport SEXP _pRoxgrad_getmaxEigenValue(SEXP MSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat >::type M(MSEXP);
-    rcpp_result_gen = Rcpp::wrap(getEigenValues(M));
+    rcpp_result_gen = Rcpp::wrap(getmaxEigenValue(M));
     return rcpp_result_gen;
 END_RCPP
 }
 // shrink_groupcpp
-arma::mat shrink_groupcpp(arma::mat C, arma::mat g_idx);
-RcppExport SEXP _pRoxgrad_shrink_groupcpp(SEXP CSEXP, SEXP g_idxSEXP) {
+arma::mat shrink_groupcpp(arma::mat A, arma::mat g_idx);
+RcppExport SEXP _pRoxgrad_shrink_groupcpp(SEXP ASEXP, SEXP g_idxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type C(CSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type A(ASEXP);
     Rcpp::traits::input_parameter< arma::mat >::type g_idx(g_idxSEXP);
-    rcpp_result_gen = Rcpp::wrap(shrink_groupcpp(C, g_idx));
+    rcpp_result_gen = Rcpp::wrap(shrink_groupcpp(A, g_idx));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -84,65 +84,44 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// soft_thresholding
-arma::vec soft_thresholding(arma::vec v, double lambdaL);
-RcppExport SEXP _pRoxgrad_soft_thresholding(SEXP vSEXP, SEXP lambdaLSEXP) {
+// soft_thresholdingcpp
+arma::mat soft_thresholdingcpp(arma::mat v, double lambdaL);
+RcppExport SEXP _pRoxgrad_soft_thresholdingcpp(SEXP vSEXP, SEXP lambdaLSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::vec >::type v(vSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type v(vSEXP);
     Rcpp::traits::input_parameter< double >::type lambdaL(lambdaLSEXP);
-    rcpp_result_gen = Rcpp::wrap(soft_thresholding(v, lambdaL));
+    rcpp_result_gen = Rcpp::wrap(soft_thresholdingcpp(v, lambdaL));
     return rcpp_result_gen;
 END_RCPP
 }
 // SPGcpp
-List SPGcpp(arma::mat X, arma::mat Y, int J, double gamma, double lambda, double Cnorm, double mu, arma::sp_mat C, arma::vec w, arma::mat g_idx, double theta, arma::vec beta, int maxiter, int display_iter, int N, double tol);
-RcppExport SEXP _pRoxgrad_SPGcpp(SEXP XSEXP, SEXP YSEXP, SEXP JSEXP, SEXP gammaSEXP, SEXP lambdaSEXP, SEXP CnormSEXP, SEXP muSEXP, SEXP CSEXP, SEXP wSEXP, SEXP g_idxSEXP, SEXP thetaSEXP, SEXP betaSEXP, SEXP maxiterSEXP, SEXP display_iterSEXP, SEXP NSEXP, SEXP tolSEXP) {
+List SPGcpp(arma::mat X, arma::mat Y, arma:: mat XX, arma:: mat XY, int J, double gamma, double lambda, double CNorm, double mu, arma::sp_mat C, arma::mat w, arma::mat g_idx, double L, double theta, arma::mat beta, int maxiter, int display_iter, int N, double tol);
+RcppExport SEXP _pRoxgrad_SPGcpp(SEXP XSEXP, SEXP YSEXP, SEXP XXSEXP, SEXP XYSEXP, SEXP JSEXP, SEXP gammaSEXP, SEXP lambdaSEXP, SEXP CNormSEXP, SEXP muSEXP, SEXP CSEXP, SEXP wSEXP, SEXP g_idxSEXP, SEXP LSEXP, SEXP thetaSEXP, SEXP betaSEXP, SEXP maxiterSEXP, SEXP display_iterSEXP, SEXP NSEXP, SEXP tolSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat >::type X(XSEXP);
     Rcpp::traits::input_parameter< arma::mat >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type XX(XXSEXP);
+    Rcpp::traits::input_parameter< arma:: mat >::type XY(XYSEXP);
     Rcpp::traits::input_parameter< int >::type J(JSEXP);
     Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
     Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
-    Rcpp::traits::input_parameter< double >::type Cnorm(CnormSEXP);
+    Rcpp::traits::input_parameter< double >::type CNorm(CNormSEXP);
     Rcpp::traits::input_parameter< double >::type mu(muSEXP);
     Rcpp::traits::input_parameter< arma::sp_mat >::type C(CSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type w(wSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type w(wSEXP);
     Rcpp::traits::input_parameter< arma::mat >::type g_idx(g_idxSEXP);
+    Rcpp::traits::input_parameter< double >::type L(LSEXP);
     Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type beta(betaSEXP);
     Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
     Rcpp::traits::input_parameter< int >::type display_iter(display_iterSEXP);
     Rcpp::traits::input_parameter< int >::type N(NSEXP);
     Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
-    rcpp_result_gen = Rcpp::wrap(SPGcpp(X, Y, J, gamma, lambda, Cnorm, mu, C, w, g_idx, theta, beta, maxiter, display_iter, N, tol));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cal2normcpp
-double cal2normcpp(arma::sp_mat A, NumericMatrix g_idx);
-RcppExport SEXP _pRoxgrad_cal2normcpp(SEXP ASEXP, SEXP g_idxSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::sp_mat >::type A(ASEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type g_idx(g_idxSEXP);
-    rcpp_result_gen = Rcpp::wrap(cal2normcpp(A, g_idx));
-    return rcpp_result_gen;
-END_RCPP
-}
-// soft_thresholding
-NumericVector soft_thresholding(NumericVector v, double lambdaL);
-RcppExport SEXP _pRoxgrad_soft_thresholding(SEXP vSEXP, SEXP lambdaLSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type v(vSEXP);
-    Rcpp::traits::input_parameter< double >::type lambdaL(lambdaLSEXP);
-    rcpp_result_gen = Rcpp::wrap(soft_thresholding(v, lambdaL));
+    rcpp_result_gen = Rcpp::wrap(SPGcpp(X, Y, XX, XY, J, gamma, lambda, CNorm, mu, C, w, g_idx, L, theta, beta, maxiter, display_iter, N, tol));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -163,13 +142,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_pRoxgrad_signC", (DL_FUNC) &_pRoxgrad_signC, 1},
     {"_pRoxgrad_sumC", (DL_FUNC) &_pRoxgrad_sumC, 1},
     {"_pRoxgrad_meanC", (DL_FUNC) &_pRoxgrad_meanC, 1},
-    {"_pRoxgrad_getEigenValues", (DL_FUNC) &_pRoxgrad_getEigenValues, 1},
+    {"_pRoxgrad_getmaxEigenValue", (DL_FUNC) &_pRoxgrad_getmaxEigenValue, 1},
     {"_pRoxgrad_shrink_groupcpp", (DL_FUNC) &_pRoxgrad_shrink_groupcpp, 2},
     {"_pRoxgrad_cal2normcpp", (DL_FUNC) &_pRoxgrad_cal2normcpp, 2},
-    {"_pRoxgrad_soft_thresholding", (DL_FUNC) &_pRoxgrad_soft_thresholding, 2},
-    {"_pRoxgrad_SPGcpp", (DL_FUNC) &_pRoxgrad_SPGcpp, 16},
-    {"_pRoxgrad_cal2normcpp", (DL_FUNC) &_pRoxgrad_cal2normcpp, 2},
-    {"_pRoxgrad_soft_thresholding", (DL_FUNC) &_pRoxgrad_soft_thresholding, 2},
+    {"_pRoxgrad_soft_thresholdingcpp", (DL_FUNC) &_pRoxgrad_soft_thresholdingcpp, 2},
+    {"_pRoxgrad_SPGcpp", (DL_FUNC) &_pRoxgrad_SPGcpp, 19},
     {"_pRoxgrad_timesTwo", (DL_FUNC) &_pRoxgrad_timesTwo, 1},
     {NULL, NULL, 0}
 };
