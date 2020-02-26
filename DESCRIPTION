@@ -11,6 +11,9 @@ Imports:
     Rcpp (>= 1.0.3),
     Matrix,
     pracma,
-    roxygen2
-LinkingTo: Rcpp
+    roxygen2,
+    RcppArmadillo
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo
 RoxygenNote: 7.0.2

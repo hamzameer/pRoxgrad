@@ -1,29 +1,32 @@
 # overlapping group lasso structure test
 #
 # #
-# ng=50  # number of groups
-# g_size=100  # group size
-# overlap=10  # number of variables overlapped between two consecutive groups
-# n=1000      # sample size
-# p=ng*(g_size-overlap)+overlap   # total number of variables
-# gamma=ng/10   # regularization parameter for group penalty L2-norm
-# lambda=ng/10  # regularization parameter for L1-norm
-# mu = 1e-3
-# #### Settings #########
-# # 
-# toy_group = gentoy_group(n, ng, g_size, overlap)
-# X = toy_group$X
-# Y = toy_group$Y
-# Tm = toy_group$Tm
-# Tw = toy_group$Tw
-# w = toy_group$w
-# # 
-# # # 
-# pre = pre_group(Tm, Tw)
-# C = pre$C
-# g_idx = pre$g_idx
-# CNorm = pre$Cnorm
-# 
+ng=50  # number of groups
+g_size=100  # group size
+overlap=10  # number of variables overlapped between two consecutive groups
+n=1000      # sample size
+p=ng*(g_size-overlap)+overlap   # total number of variables
+gamma=ng/10   # regularization parameter for group penalty L2-norm
+lambda=ng/10  # regularization parameter for L1-norm
+mu = 1e-3
+#### Settings #########
+#
+toy_group = gentoy_group(n, ng, g_size, overlap)
+X = toy_group$X
+Y = toy_group$Y
+Tm = toy_group$Tm
+Tw = toy_group$Tw
+w = toy_group$w
+#
+# #
+pre = pre_group(Tm, Tw)
+C = pre$C
+g_idx = pre$g_idx
+CNorm = pre$Cnorm
+option = NULL
+C1 <- as.matrix(C)
+
+
 # solve = SPG(prob = 'group', Y = Y, X = X, gamma = gamma, lambda = lambda, C= C, CNorm = Cnorm, g_idx = g_idx)
 
 
@@ -61,3 +64,19 @@
 ### Function 4 | [grad_beta,grad_obj,grad_density,grad_iter,grad_time, L] = SPG_linesearch(prob, Y, X, gamma, lambda, C,option, g_idx);
 
 # SPG with line search on Lipschitz constant for large-scale problems
+SPGcpp(X, 
+       Y, 
+       J, 
+       5, 
+       5, 
+       Cnorm=CNorm, 
+       mu,
+       C,
+       w,
+       g_idx,
+       theta, 
+       beta,
+       maxiter=100,
+       display_iter=10,
+       N, 
+       tol=1e-07)

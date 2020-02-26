@@ -17,8 +17,28 @@ meanC <- function(x) {
     .Call(`_pRoxgrad_meanC`, x)
 }
 
-rcpp_hello_world <- function() {
-    .Call(`_pRoxgrad_rcpp_hello_world`)
+getEigenValues <- function(M) {
+    .Call(`_pRoxgrad_getEigenValues`, M)
+}
+
+shrink_groupcpp <- function(C, g_idx) {
+    .Call(`_pRoxgrad_shrink_groupcpp`, C, g_idx)
+}
+
+cal2normcpp <- function(A, g_idx) {
+    .Call(`_pRoxgrad_cal2normcpp`, A, g_idx)
+}
+
+soft_thresholding <- function(v, lambdaL) {
+    .Call(`_pRoxgrad_soft_thresholding`, v, lambdaL)
+}
+
+SPGcpp <- function(X, Y, J, gamma, lambda, Cnorm, mu, C, w, g_idx, theta, beta, maxiter, display_iter, N, tol) {
+    .Call(`_pRoxgrad_SPGcpp`, X, Y, J, gamma, lambda, Cnorm, mu, C, w, g_idx, theta, beta, maxiter, display_iter, N, tol)
+}
+
+cal2normcpp <- function(A, g_idx) {
+    .Call(`_pRoxgrad_cal2normcpp`, A, g_idx)
 }
 
 soft_thresholding <- function(v, lambdaL) {

@@ -1,6 +1,6 @@
 SPG <- function(prob,Y, X, gamma, lambda, C, CNorm, option  = NULL, g_idx) {
   # Smoothing Proximal Gradient based on FISTA for medium-scale problem
-  # with a pre-computed Lipschitz constant (without line-search
+  # with a pre-computed Lipschitz constant (without line-search)
 
   # problem to solve either 'group'
   # X inputs
@@ -45,8 +45,8 @@ SPG <- function(prob,Y, X, gamma, lambda, C, CNorm, option  = NULL, g_idx) {
 
   theta = 1
 
-  XX = Matrix::crossprod(X)
-  XY = Matrix::crossprod(X,Y)
+  XX = Matrix::t(X)%*%X
+  XY = Matrix::t(X)%*%Y
 
   # insert new calculation for lipschitz continuity
 
@@ -58,7 +58,6 @@ SPG <- function(prob,Y, X, gamma, lambda, C, CNorm, option  = NULL, g_idx) {
   }
 
   # tic
-  maxiter = 1000
   for(iter in 1:maxiter){
 
     ## density later
@@ -71,14 +70,14 @@ SPG <- function(prob,Y, X, gamma, lambda, C, CNorm, option  = NULL, g_idx) {
     if (J < 2 * N && J < 10000){
       grad = XX %*% w - XY + Matrix::t(C)%*%A;
     }else{
-      grad = t(X)%*%(X %*% w - Y) + Matrix::t(C)%*%A
+      grad = t(X)%*%(X %*% w - Y) + t(C)%*%A
     }
 
     ## Final step to do
     ## First do in R
     ## Then do in Rcpp
-    # beta_new=soft_threshold(w-(1/L)*grad, lambda/L);
-    beta_new=soft_thresholding(w-(1/L)*as.matrix(grad), lambda/L);
+    beta_new=soft_threshold(w-(1/L)*grad, lambda/L);
+    beta_new=soft_thresholding(w-(1/L)*grad, lambda/L);
     # density[iter]=density[iter]/J;
 
     theta_new=(sqrt(theta^4+4*theta^2)-theta^2)/2;
@@ -93,7 +92,7 @@ SPG <- function(prob,Y, X, gamma, lambda, C, CNorm, option  = NULL, g_idx) {
 #    if (iter>10 & (abs(obj[iter]-obj[iter-1])/abs(obj[iter-1])<tol)) break;
 
 
-    if (verbose & (iter==1 | pracma::mod(iter, display_iter)==0)){
+    if (verbose & (iter==1 | mod(iter, display_iter)==0)){
       cat('Iter:',iter, ' Obj:',obj[iter], ' density:',density[iter],'\n')
     }
 

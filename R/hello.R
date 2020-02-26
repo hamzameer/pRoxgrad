@@ -7,3 +7,7 @@
 # library(Rcpp)
 # Rcpp::sourceCpp(soft_threshold.cpp)
 # Rcpp.package.skeleton("pRoxgrad", example_code = FALSE, cpp_files = c(".\src\soft_thresholding.cpp"))
+# install.packages('RcppArmadillo')
+# library(RcppArmadillo)
+# usethis::use_rcpp_armadillo()
+# use_package("RcppArmadillo")
